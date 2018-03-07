@@ -289,7 +289,8 @@ namespace Xwt.Mac
 			double x = cellFrame.X;
 			for (int i = 0; i < visibleCells.Length; i++) {
 				var cell = (NSView)visibleCells [i];
-				var height = cell.FittingSize.Height;
+				var canvas = cell as ICanvasCellRenderer;
+				var height = (canvas != null) ? canvas.GetRequiredSize (SizeConstraint.WithSize (sizes[i])).Height : cell.FittingSize.Height;
 				var y = (cellFrame.Height - height) / 2;
 				yield return new CellPos { Cell = cell, Frame = new CGRect (x, y, sizes [i], height) };
 				x += sizes [i];
