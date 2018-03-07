@@ -41,7 +41,7 @@ namespace Samples
 			tree.HeadersVisible = false;
 			tree.SelectionMode = SelectionMode.None;
 
-			var col = new ListViewColumn ();
+			var col = new ListViewColumn () { Expands = true };
 			var cellView = new ExpandableTextCellView ();
 			cellView.NodeField = nodeField;
 			col.Views.Add (cellView, true);
@@ -108,7 +108,7 @@ namespace Samples
 			return status;
 		}
 
-		protected override Size OnGetRequiredSize ()
+		protected override Size OnGetRequiredSize (SizeConstraint widthConstraint)
 		{
 			var node = GetValue (NodeField);
 			var status = GetViewStatus (node);
@@ -117,11 +117,13 @@ namespace Samples
 			layout.Text = node.Text;
 			var textSize = layout.GetSize ();
 
+			var maxWidth = widthConstraint.IsConstrained ? widthConstraint.AvailableSize : status.LastRenderWidth;
+
 			// When in expanded mode, the height of the row depends on the width. Since we don't know the width,
 			// let's use the last width that was used for rendering.
 
-			if (status.Expanded && status.LastRenderWidth != 0 && layout.GetSize ().Width > status.LastRenderWidth) {
-				layout.Width = status.LastRenderWidth - addImage.Width - MoreLinkSpacing;
+			if (status.Expanded && maxWidth > 0 && textSize.Width > maxWidth) {
+				layout.Width = maxWidth - addImage.Width - MoreLinkSpacing;
 				textSize = layout.GetSize ();
 			}
 
