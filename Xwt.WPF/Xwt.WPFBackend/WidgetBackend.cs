@@ -1,4 +1,4 @@
-﻿//
+//
 // WidgetBackend.cs
 //
 // Authors:
@@ -34,12 +34,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using SWM = System.Windows.Media;
 using SWC = System.Windows.Controls; // When we need to resolve ambigituies.
 using SW = System.Windows; // When we need to resolve ambigituies.
 
 using Xwt.Backends;
+using Xwt.Drawing;
 using Color = Xwt.Drawing.Color;
 
 namespace Xwt.WPFBackend
@@ -79,13 +79,20 @@ namespace Xwt.WPFBackend
 
 		protected virtual void Initialize ()
 		{
+			VisualStudioColorProvider vsColorProvider = Xwt.Drawing.Context.VisualStudioColorProvider;
+			if (vsColorProvider != null)
+				SetColorsFromVisualStudio (vsColorProvider);
 		}
-		
+
 		~WidgetBackend ()
 		{
 			Dispose (false);
 		}
-		
+
+		protected virtual void SetColorsFromVisualStudio (VisualStudioColorProvider colorProvider)
+		{
+		}
+
 		public void Dispose ()
 		{
 			GC.SuppressFinalize (this);
@@ -587,7 +594,7 @@ namespace Xwt.WPFBackend
 				if (source == null)
 					return 1;
 
-				Matrix m = source.CompositionTarget.TransformToDevice;
+				SWM.Matrix m = source.CompositionTarget.TransformToDevice;
 				return m.M11;
 			}
 		}
@@ -600,7 +607,7 @@ namespace Xwt.WPFBackend
 				if (source == null)
 					return 1;
 
-				Matrix m = source.CompositionTarget.TransformToDevice;
+				SWM.Matrix m = source.CompositionTarget.TransformToDevice;
 				return m.M22;
 			}
 		}

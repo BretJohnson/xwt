@@ -1,4 +1,4 @@
-﻿// 
+// 
 // ButtonBackend.cs
 //  
 // Author:
@@ -35,6 +35,7 @@ using System.Text.RegularExpressions;
 using SWC = System.Windows.Controls;
 using Xwt.Backends;
 using System.Windows.Data;
+using Xwt.Drawing;
 
 
 namespace Xwt.WPFBackend
@@ -56,6 +57,12 @@ namespace Xwt.WPFBackend
 
 		protected ButtonBase Button {
 			get { return (ButtonBase)Widget; }
+		}
+
+		protected override void SetColorsFromVisualStudio (VisualStudioColorProvider colorProvider)
+		{
+			Button.Background = colorProvider.GetSolidBrush ("VS.Environment.ButtonFaceColor");
+			Button.Foreground = colorProvider.GetSolidBrush ("VS.Environment.ButtonTextColor");
 		}
 
 		protected new IButtonEventSink EventSink {

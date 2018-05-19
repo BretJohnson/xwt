@@ -145,6 +145,7 @@
     <Compile Include="Xwt.WPFBackend\Util.cs" />
     <Compile Include="Xwt.WPFBackend\ValuesContainer.cs" />
     <Compile Include="Xwt.WPFBackend\CanvasBackend.cs" />
+    <Compile Include="Xwt.WPFBackend\VisualStudioColorProviderExtension.cs" />
     <Compile Include="Xwt.WPFBackend\WidgetBackend.cs" />
     <Compile Include="Xwt.WPFBackend\WindowBackend.cs" />
     <Compile Include="Xwt.WPFBackend\WindowFrameBackend.cs" />
