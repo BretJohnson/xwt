@@ -32,7 +32,7 @@ namespace Xwt.WPFBackend
 {
 	public static class VisualStudioColorProviderExtensions
 	{
-		public static SWM.Brush GetSolidBrush (this VisualStudioColorProvider visualStudioColorProvider, string colorName)
+		public static SWM.Brush GetSolidBrush (this IVisualStudioColorProvider visualStudioColorProvider, string colorName)
 		{
 			Color color = visualStudioColorProvider.GetColor (colorName);
 			return ResPool.GetSolidBrush (color.ToWpfColor ());

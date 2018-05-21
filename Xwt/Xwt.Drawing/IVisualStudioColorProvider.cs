@@ -27,16 +27,28 @@
 
 namespace Xwt.Drawing
 {
-	public abstract class VisualStudioColorProvider
+	/// <summary>
+	/// This interface provides a way for Xwt widgets to assume the right themed look when running
+	/// inside of Visual Studio. If the client app uses Xwt for Visual Studio UI, it should implement
+	/// this interface and set it on the global Context.VisualStudioColorProvider. Conceptually,
+	/// this can apply to both VSWindows and VSMac, but the current implementation is only for VSWindows,
+	/// for WPF UI for a handful of widgets.
+	/// </summary>
+	public interface IVisualStudioColorProvider
 	{
 		/// <summary>
-		/// Get the color
+		/// Get the color given a VS themed color name (e.g. "Environment.CommandBarSelectedColor").
+		/// See https://docs.microsoft.com/en-us/visualstudio/extensibility/ux-guidelines/shared-colors-for-visual-studio
+		/// for a (partial) list of themed colors, for VSWin.
 		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
-		public abstract Color GetColor (string name);
+		/// <param name="name">VS color name </param>
+		/// <returns>themed color</returns>
+		Color GetColor (string name);
 
-		public abstract VSPlatform Platform { get; }
+		/// <summary>
+		/// Get the host platform, VSWin or VSMac. Xplat UI can use this to theme accordingly.
+		/// </summary>
+		VSPlatform Platform { get; }
 	}
 
 	public enum VSPlatform

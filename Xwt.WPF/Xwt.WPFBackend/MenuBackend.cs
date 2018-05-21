@@ -1,4 +1,4 @@
-﻿// 
+// 
 // MenuBackend.cs
 //  
 // Author:
@@ -34,6 +34,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using Xwt.Backends;
+using Xwt.Drawing;
+using Matrix = System.Windows.Media.Matrix;
 
 namespace Xwt.WPFBackend
 {
@@ -144,6 +146,17 @@ namespace Xwt.WPFBackend
 		{
 			if (this.menu == null) {
 				this.menu = new ContextMenu ();
+
+				// I think we'll need to use a customized XAML menu template to get a decent themed look, hopefully copying from other VS code
+#if NOTYET
+				VisualStudioColorProvider colorProvider = Xwt.Drawing.Context.VisualStudioColorProvider;
+				if (colorProvider != null) {
+					this.menu.Foreground = colorProvider.GetSolidBrush ("Environment.CommandBarTextActiveColor");
+					this.menu.Background = colorProvider.GetSolidBrush ("Environment.CommandBarMenuBackgroundGradientBeginColor");
+					this.menu.BorderBrush = colorProvider.GetSolidBrush ("Environment.CommandBarMenuBorderColor");
+				}
+#endif
+
 				foreach (var item in Items)
 					this.menu.Items.Add (item.Item);
 			}

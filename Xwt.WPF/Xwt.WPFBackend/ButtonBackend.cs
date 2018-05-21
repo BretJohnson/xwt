@@ -59,7 +59,7 @@ namespace Xwt.WPFBackend
 			get { return (ButtonBase)Widget; }
 		}
 
-		protected override void SetColorsFromVisualStudio (VisualStudioColorProvider colorProvider)
+		protected override void SetColorsFromVisualStudio (IVisualStudioColorProvider colorProvider)
 		{
 			Button.Background = colorProvider.GetSolidBrush ("VS.Environment.ButtonFaceColor");
 			Button.Foreground = colorProvider.GetSolidBrush ("VS.Environment.ButtonTextColor");

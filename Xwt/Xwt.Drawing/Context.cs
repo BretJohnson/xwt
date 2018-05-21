@@ -468,7 +468,7 @@ namespace Xwt.Drawing
 			NotifyGlobalStylesChanged ();
 		}
 
-		public static VisualStudioColorProvider VisualStudioColorProvider { get; set; } = null;
+		public static IVisualStudioColorProvider VisualStudioColorProvider { get; set; } = null;
 
 		public static IEnumerable<string> RegisteredStyles {
 			get {
