@@ -163,6 +163,8 @@ namespace Xwt
 			}
 		}
 
+		public void Theme() { Backend.Theme(); }
+
 		public Color LabelColor {
 			get { return Backend.LabelColor; }
 			set { Backend.LabelColor = value; }

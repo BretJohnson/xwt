@@ -44,7 +44,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Xwt.Backends\IPasswordEntryBackend.cs" />
-    <Compile Include="Xwt.Drawing\IVisualStudioColorProvider.cs" />
     <Compile Include="Xwt\PasswordEntry.cs" />
     <Compile Include="Xwt\TextInputEventArgs.cs" />
     <Compile Include="Xwt\Widget.cs" />

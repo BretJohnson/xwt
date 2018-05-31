@@ -33,6 +33,7 @@ namespace Xwt.Backends
 	{
 		Color LabelColor { get; set; }
 		bool IsDefault { get; set; }
+		void Theme ();
 		void SetButtonStyle (ButtonStyle style);
 		void SetButtonType (ButtonType type);
 		void SetContent (string label, bool useMnemonic, ImageDescription image, ContentPosition position);

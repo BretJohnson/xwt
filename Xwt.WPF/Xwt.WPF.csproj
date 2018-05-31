@@ -145,7 +145,7 @@
     <Compile Include="Xwt.WPFBackend\Util.cs" />
     <Compile Include="Xwt.WPFBackend\ValuesContainer.cs" />
     <Compile Include="Xwt.WPFBackend\CanvasBackend.cs" />
-    <Compile Include="Xwt.WPFBackend\VisualStudioColorProviderExtension.cs" />
+    <Compile Include="Xwt.WPFBackend\VisualStudioResourceProviderExtensions.cs" />
     <Compile Include="Xwt.WPFBackend\WidgetBackend.cs" />
     <Compile Include="Xwt.WPFBackend\WindowBackend.cs" />
     <Compile Include="Xwt.WPFBackend\WindowFrameBackend.cs" />
@@ -162,6 +162,7 @@
     <Compile Include="Xwt.WPFBackend\CalendarBackend.cs" />
     <Compile Include="Xwt.WPFBackend.Interop\IDocHostUIHandler.cs" />
     <Compile Include="Xwt.WPFBackend.CellViews\RadioButtonCellViewBackend.cs" />
+    <Compile Include="Xwt.WPFBackend\WPFThemedResourceProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

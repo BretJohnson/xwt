@@ -1,4 +1,4 @@
-﻿//
+//
 // MenuButtonBackend.cs
 //
 // Author:
@@ -26,6 +26,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using Xwt.Backends;
 
 
@@ -61,6 +62,22 @@ namespace Xwt.WPFBackend
 			}
 
 			DropDownButton.InvalidateMeasure();
+		}
+
+		/// <summary>
+		/// For some other Xwt controls (e.g. menus) we always theme them. But for MenuButtons, they are generally
+		/// only themed when used on a background that's always themed (e.g. not always white). So by default
+		/// MenuButtons are unthemed, but this method enables theming when desired.
+		/// </summary>
+		public void Theme ()
+		{
+			object foregroundKey = WPFEngine.ThemedResourceProvider?.MenuButtonForegroundBrushKey;
+			if (foregroundKey != null)
+				((DropDownButton)Button).SetResourceReference (Control.ForegroundProperty, foregroundKey);
+
+			object backgroundKey = WPFEngine.ThemedResourceProvider?.MenuButtonBackgroundBrushKey;
+			if (backgroundKey != null)
+				((DropDownButton)Button).SetResourceReference (Control.BackgroundProperty, backgroundKey);
 		}
 
 		private void OnMenuOpening (object sender, DropDownButton.MenuOpeningEventArgs e)

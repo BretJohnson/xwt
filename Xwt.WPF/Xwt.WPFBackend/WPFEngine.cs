@@ -46,6 +46,8 @@ namespace Xwt.WPFBackend
 
 		public static WPFEngine Instance { get; private set; }
 
+		public static WPFThemedResourceProvider ThemedResourceProvider { get; set; } = null;
+
 		public WPFEngine ()
 		{
 			Instance = this;

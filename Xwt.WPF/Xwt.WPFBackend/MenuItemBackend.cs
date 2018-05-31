@@ -1,4 +1,4 @@
-﻿// 
+// 
 // MenuItemBackend.cs
 //  
 // Author:
@@ -35,6 +35,7 @@ using System.Windows.Controls;
 using SWC = System.Windows.Controls;
 using SWMI = System.Windows.Media.Imaging;
 using Xwt.Backends;
+using Xwt.Drawing;
 
 
 namespace Xwt.WPFBackend
@@ -59,6 +60,17 @@ namespace Xwt.WPFBackend
 			this.item = item;
 			this.menuItem = item as SWC.MenuItem;
 			useMnemonic = true;
+
+			if (item is SWC.MenuItem) {
+				object templateKey = WPFEngine.ThemedResourceProvider?.MenuItemTemplateKey;
+				if (templateKey != null)
+					((SWC.MenuItem) item).SetResourceReference (Control.TemplateProperty, templateKey);
+			}
+			else if (item is SWC.Separator) {
+				object styleKey = WPFEngine.ThemedResourceProvider?.MenuSeparatorStyleKey;
+				if (styleKey != null)
+					((SWC.Separator)item).SetResourceReference (Control.StyleProperty, styleKey);
+			}
 		}
 
 		public void Initialize (IMenuItemEventSink eventSink)

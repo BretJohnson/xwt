@@ -147,15 +147,9 @@ namespace Xwt.WPFBackend
 			if (this.menu == null) {
 				this.menu = new ContextMenu ();
 
-				// I think we'll need to use a customized XAML menu template to get a decent themed look, hopefully copying from other VS code
-#if NOTYET
-				VisualStudioColorProvider colorProvider = Xwt.Drawing.Context.VisualStudioColorProvider;
-				if (colorProvider != null) {
-					this.menu.Foreground = colorProvider.GetSolidBrush ("Environment.CommandBarTextActiveColor");
-					this.menu.Background = colorProvider.GetSolidBrush ("Environment.CommandBarMenuBackgroundGradientBeginColor");
-					this.menu.BorderBrush = colorProvider.GetSolidBrush ("Environment.CommandBarMenuBorderColor");
-				}
-#endif
+				var styleKey = WPFEngine.ThemedResourceProvider?.ContextMenuStyleKey;
+				if (styleKey != null)
+					this.menu.SetResourceReference (Control.StyleProperty, styleKey);
 
 				foreach (var item in Items)
 					this.menu.Items.Add (item.Item);

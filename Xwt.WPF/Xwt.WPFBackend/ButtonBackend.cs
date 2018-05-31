@@ -56,48 +56,44 @@ namespace Xwt.WPFBackend
 		}
 
 		protected ButtonBase Button {
-			get { return (ButtonBase)Widget; }
-		}
-
-		protected override void SetColorsFromVisualStudio (IVisualStudioColorProvider colorProvider)
-		{
-			Button.Background = colorProvider.GetSolidBrush ("VS.Environment.ButtonFaceColor");
-			Button.Foreground = colorProvider.GetSolidBrush ("VS.Environment.ButtonTextColor");
+			get { return (ButtonBase) Widget; }
 		}
 
 		protected new IButtonEventSink EventSink {
-			get { return (IButtonEventSink)base.EventSink; }
+			get { return (IButtonEventSink) base.EventSink; }
 		}
 
-		public void SetButtonStyle (ButtonStyle style) {
-			switch (style)
-			{
-				case ButtonStyle.Normal:
-					Button.ClearValue (SWC.Control.BackgroundProperty);
-					Button.ClearValue (SWC.Control.BorderThicknessProperty);
-					Button.ClearValue (SWC.Control.BorderBrushProperty);
-					break;
-				case ButtonStyle.Flat:
-					Button.Background = Brushes.Transparent;
-					Button.BorderBrush = Brushes.Transparent;
-					break;
-				case ButtonStyle.Borderless:
-					Button.ClearValue (SWC.Control.BackgroundProperty);
-					Button.BorderThickness = new Thickness (0);
-					Button.BorderBrush = Brushes.Transparent;
-					break;
+		public void SetButtonStyle (ButtonStyle style)
+		{
+			switch (style) {
+			case ButtonStyle.Normal:
+				Button.ClearValue (SWC.Control.BackgroundProperty);
+				Button.ClearValue (SWC.Control.BorderThicknessProperty);
+				Button.ClearValue (SWC.Control.BorderBrushProperty);
+				break;
+			case ButtonStyle.Flat:
+				Button.Background = Brushes.Transparent;
+				Button.BorderBrush = Brushes.Transparent;
+				break;
+			case ButtonStyle.Borderless:
+				Button.ClearValue (SWC.Control.BackgroundProperty);
+				Button.BorderThickness = new Thickness (0);
+				Button.BorderBrush = Brushes.Transparent;
+				break;
 			}
+
 			Button.InvalidateMeasure ();
 		}
 
-		public virtual void SetButtonType (ButtonType type) {
+		public virtual void SetButtonType (ButtonType type)
+		{
 			switch (type) {
 			case ButtonType.Normal:
 				Button.Style = null;
 				break;
 
 			case ButtonType.DropDown:
-				Button.Style = (Style) ButtonResources ["NormalDropDown"];
+				Button.Style = (Style) ButtonResources["NormalDropDown"];
 				break;
 			}
 
@@ -128,21 +124,25 @@ namespace Xwt.WPFBackend
 						labelCtrl.Content = accessText;
 					else
 						labelCtrl.Content = label;
-					labelCtrl.SetBinding (SWC.Label.ForegroundProperty, new Binding ("Foreground") { Source = Button });
+					labelCtrl.SetBinding (SWC.Label.ForegroundProperty, new Binding ("Foreground") {Source = Button});
 					grid.Children.Add (labelCtrl);
 				}
+
 				Button.Content = grid;
 			}
+
 			Button.InvalidateMeasure ();
 		}
 
-		public Xwt.Drawing.Color LabelColor
-		{
-			get { return Button.Foreground.ToXwtColor(); }
-			set { Button.Foreground = ResPool.GetSolidBrush (value.ToWpfColor()); }
+		public virtual bool Themed { get; set; } = false;
+
+		public Xwt.Drawing.Color LabelColor {
+			get { return Button.Foreground.ToXwtColor (); }
+			set { Button.Foreground = ResPool.GetSolidBrush (value.ToWpfColor ()); }
 		}
 
 		bool isDefault;
+
 		public virtual bool IsDefault {
 			get { return (Button as SWC.Button)?.IsDefault ?? isDefault; }
 			set {
@@ -152,6 +152,10 @@ namespace Xwt.WPFBackend
 				else
 					isDefault = value; // just cache the value
 			}
+		}
+
+		public virtual void Theme ()
+		{
 		}
 
 		public override void EnableEvent (object eventId)

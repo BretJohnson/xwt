@@ -25,30 +25,40 @@
 // THE SOFTWARE.
 
 
-namespace Xwt.Drawing
+using System.Windows;
+using Xwt.Drawing;
+
+namespace Xwt.WPFBackend
 {
 	/// <summary>
 	/// This interface provides a way for Xwt widgets to assume the right themed look when running
 	/// inside of Visual Studio. If the client app uses Xwt for Visual Studio UI, it should implement
-	/// this interface and set it on the global Context.VisualStudioColorProvider. Conceptually,
+	/// this interface and set it on the global Context.IVisualStudioResourceProvider. Conceptually,
 	/// this can apply to both VSWindows and VSMac, but the current implementation is only for VSWindows,
 	/// for WPF UI for a handful of widgets.
 	/// </summary>
-	public interface IVisualStudioColorProvider
+	public abstract class WPFThemedResourceProvider
 	{
 		/// <summary>
 		/// Get the color given a VS themed color name (e.g. "Environment.CommandBarSelectedColor").
 		/// See https://docs.microsoft.com/en-us/visualstudio/extensibility/ux-guidelines/shared-colors-for-visual-studio
 		/// for a (partial) list of themed colors, for VSWin.
 		/// </summary>
-		/// <param name="name">VS color name </param>
+		/// <param name="colorName">VS color name </param>
 		/// <returns>themed color</returns>
-		Color GetColor (string name);
+		public abstract Color GetColor (string colorName);
 
-		/// <summary>
-		/// Get the host platform, VSWin or VSMac. Xplat UI can use this to theme accordingly.
-		/// </summary>
-		VSPlatform Platform { get; }
+		public abstract object MenuItemTemplateKey { get; }
+
+		public abstract object MenuSeparatorStyleKey { get; }
+
+		public abstract object ContextMenuStyleKey { get; }
+
+		public abstract object MenuButtonForegroundBrushKey { get; }
+
+		public abstract object MenuButtonBackgroundBrushKey { get; }
+
+		public abstract Style MenuButtonStyle { get; }
 	}
 
 	public enum VSPlatform

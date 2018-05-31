@@ -79,18 +79,11 @@ namespace Xwt.WPFBackend
 
 		protected virtual void Initialize ()
 		{
-			IVisualStudioColorProvider vsColorProvider = Xwt.Drawing.Context.VisualStudioColorProvider;
-			if (vsColorProvider != null)
-				SetColorsFromVisualStudio (vsColorProvider);
 		}
 
 		~WidgetBackend ()
 		{
 			Dispose (false);
-		}
-
-		protected virtual void SetColorsFromVisualStudio (IVisualStudioColorProvider colorProvider)
-		{
 		}
 
 		public void Dispose ()
